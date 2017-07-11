@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- mvn mybatis-generator:generate -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 可以将一些常量配置到properties中 -->
+		<!-- <properties resource="config.properties" /> -->
+		<!-- 解决生成的注释乱码 -->
+		<property name="javaFileEncoding" value="UTF-8" />
+		<!-- 配置插件 -->
+		<plugin type="com.qaplus.plugin.MyBatisPaginationPlugin" />
+		<plugin type="com.qaplus.plugin.OverIsMergeablePlugin" />
+
+		<commentGenerator type="com.qaplus.plugin.MyCommentGenerator" />
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost/qaplus" userId="root" password="zc">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- C:\zc\workspace\my\qaplus\src\main\java D:\project\qaplus\src\main\java 
+			"D:\temp\qaplus\src\main\java" -->
+		<javaModelGenerator targetPackage="com.qaplus.entity"
+			targetProject="src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.qaplus.mapper"
+			targetProject="src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.qaplus.mapper" targetProject="src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+		<table tableName="qa_user" domainObjectName="QaUser"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_excel_config" domainObjectName="QaExcelConfig"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_system_constant" domainObjectName="QaSystemConstant"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_exam_error_questions" domainObjectName="QaExamErrorQuestions"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_send_mail_info" domainObjectName="QaSendMailInfo"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_paper_stu" domainObjectName="QaPaperStu"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_user_class" domainObjectName="QaUserClass"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_paper_stu_detail" domainObjectName="QaPaperStuDetail"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<!-- <table tableName="base_table" domainObjectName="BaseTable" enableCountByExample="true" 
+			enableUpdateByExample="false" enableDeleteByExample="true" enableSelectByExample="true" 
+			selectByExampleQueryId="true"></table> -->
+		<table tableName="qa_attachment" domainObjectName="QaAttachment"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_board" domainObjectName="QaBoard"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_board_user" domainObjectName="QaBoardUser"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_class" domainObjectName="QaClass"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_exam_question" domainObjectName="QaExamQuestion"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_exam_question_item" domainObjectName="QaExamQuestionItem"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_log" domainObjectName="QaLog"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_paper" domainObjectName="QaPaper"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_recommend_file" domainObjectName="QaRecommendFile"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_resources" domainObjectName="QaResources"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_resources_role" domainObjectName="QaResourcesRole"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_role" domainObjectName="QaRole"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_s_question" domainObjectName="QaSQuestion"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_score" domainObjectName="QaScore"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_stu_answer" domainObjectName="QaStuAnswer"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_stu_comment" domainObjectName="QaStuComment"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_stu_graduation" domainObjectName="QaStuGraduation"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_stu_homework" domainObjectName="QaStuHomework"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_stu_hw_answer" domainObjectName="QaStuHwAnswer"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_stu_hw_detail" domainObjectName="QaStuHwDetail"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_stu_hw_question" domainObjectName="QaStuHwQuestion"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_t_question" domainObjectName="QaTQuestion"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_task" domainObjectName="QaTask"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_user_role" domainObjectName="QaUserRole"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+		<table tableName="qa_user_task" domainObjectName="QaUserTask"
+			enableCountByExample="true" enableUpdateByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true"></table>
+
+	</context>
+</generatorConfiguration>

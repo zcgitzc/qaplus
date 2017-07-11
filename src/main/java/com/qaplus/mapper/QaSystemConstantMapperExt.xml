@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaSystemConstantMapperExt">
+	
+	<sql id="queryForPageSQL">
+		select * from qa_system_constant t 
+			where t.is_deleted='N' 
+		and t.category like concat('%',#{searchKey},'%')
+		order by t.rec_update_date desc
+	</sql>
+	<select id="queryForPage" resultMap="BaseResultMap">
+		<include refid="queryForPageSQL"/>
+		<include refid="MySqlDialectSuffix" />
+	</select>
+	<select id="countForPage" resultType="java.lang.Integer">
+		select count(*) from (
+			<include refid="queryForPageSQL"/>
+		) temp_table
+	</select>
+</mapper>

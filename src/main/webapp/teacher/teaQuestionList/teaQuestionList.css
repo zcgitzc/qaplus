@@ -1,0 +1,12 @@
+.question_search ul li {
+	float: left;
+	width: 75px;
+	margin-left: 10px;
+}
+.search{
+	margin-top: 0px !important;
+}
+#toolbar {
+    margin-left: -50px;
+}
+

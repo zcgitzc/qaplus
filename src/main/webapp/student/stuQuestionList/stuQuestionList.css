@@ -1,0 +1,42 @@
+.table_content {
+    width: 95%;
+    margin: 50 auto;
+}
+#toolbar {
+    margin-left: -50px;
+}
+.question_search ul li {
+    float: left;
+    width: 75px;
+    margin-left: 10px;
+}
+.add_q {
+    margin: 0 auto;
+    width: 95%;
+    text-align: center;
+    margin-top: 40px;
+}
+#btnFormGroup {
+    margin-top: 70px;
+}
+#btnFormGroup button: last-child {
+    margin-left: 125px;
+}
+#radioset ul li {
+    float: left;
+    width: 135px;
+    margin-left: 10px;
+}
+.search {
+    margin-top: 0px !important;
+}
+/**
+	layui-layer-shade  --背景遮罩 	z-index=19891017   
+	layui-layer 	   --弹出框 	z-index=19891018
+**/
+
+/** layer 和  select2冲突了  select2在layer弹框的上面**/
+
+.select2-container {
+    z-index: 19891020 !important;
+}

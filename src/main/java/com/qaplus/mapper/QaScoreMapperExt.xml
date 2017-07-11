@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaScoreMapperExt">
+	<update id="updateStuPaperScore">
+		update qa_score s set s.score=#{score}
+		where s.is_deleted='N' and s.paper_id=#{paperId} and s.stu_id=#{stuId}
+	</update>
+	<select id="queryTopThree" resultMap="BaseResultMap">
+		select * from qa_score s
+		where s.is_deleted='N' and s.paper_id=#{paperId} order by s.score desc limit 3
+	</select>
+</mapper>

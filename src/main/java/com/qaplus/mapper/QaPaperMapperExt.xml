@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaPaperMapperExt">
+	<resultMap type="com.qaplus.entity.vo.PaperVo" id="PaperBaseResultMap" extends="BaseResultMap">
+		
+	</resultMap>
+	<sql id="queryAllPaperForPageSQL">
+		select *
+		<!--  <![CDATA[  
+			CASE
+				WHEN NOW()<p.exam_date THEN 'UN_START'
+				WHEN NOW()>p.exam_date AND NOW()<DATE_ADD(p.exam_date,INTERVAL p.exam_long MINUTE) THEN 'STARTING'
+				WHEN NOW()>DATE_ADD(p.exam_date,INTERVAL 2 MINUTE) THEN 'STARTED'
+			END as status
+		 ]]> -->
+		from qa_paper p where p.is_deleted='N'
+		<if test="my != null">
+			and p.paper_person=#{my}
+		</if>
+		<if test="categorys !=null and categorys.length>0">
+			and p.paper_category in
+			<foreach collection="categorys" close=")" open="(" item="category"
+				separator=",">
+				#{category}
+			</foreach>
+		</if>
+		<if test="status !=null and status.length>0">
+			and p.paper_status in
+			<foreach collection="status" close=")" open="(" item="statusItem"
+				separator=",">
+				#{statusItem}
+			</foreach>
+		</if>
+		<if test="title !=null and title!=''">
+			and p.paper_title like CONCAT('%',#{title},'%')
+		</if>
+		order by p.rec_update_date desc
+	</sql>
+	<select id="queryAllPaperForPage" resultMap="PaperBaseResultMap">
+		<include refid="queryAllPaperForPageSQL"/>
+		<include refid="MySqlDialectSuffix" />
+	</select>
+	
+	<select id="countForQueryAll" resultType="java.lang.Integer">
+		select count(*) from (
+			<include refid="queryAllPaperForPageSQL"/>
+		) temp_table
+	</select>
+	
+	<select id="queryStuPapers" resultMap="PaperBaseResultMap">
+		SELECT
+			p.*
+		FROM
+			qa_paper_stu s,
+			qa_paper p
+		WHERE
+			s.paper_id = p.id
+		AND s.is_deleted = 'N'
+		AND p.is_deleted = 'N'
+		AND s.stu_id = #{stuId}
+	</select>
+</mapper>

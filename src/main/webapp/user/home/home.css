@@ -1,0 +1,17 @@
+.nav_container {
+	margin-top: 70px;
+}
+
+.panel {
+	width: 310px;
+	float: left;
+	height: 215px;
+	margin-left: 100px;
+}
+.panel-body{
+    text-align: center;
+}
+.panel button{
+	font-size: 120px
+}
+

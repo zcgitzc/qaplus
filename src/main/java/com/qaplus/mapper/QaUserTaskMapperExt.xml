@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaUserTaskMapperExt" >
+	<update id="delUserTask">
+		update qa_user_task t set t.is_deleted='Y' where t.is_deleted='N' and t.task_id=#{taskId}
+	</update>
+</mapper>

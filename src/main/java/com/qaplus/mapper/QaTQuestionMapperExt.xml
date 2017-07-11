@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaTQuestionMapperExt">
+	<sql id="queryTQuestionForPageSql">
+		select
+		<include refid="Base_Column_List" />
+		from qa_t_question q where q.is_deleted='N'
+		<if test="cond.my != null and cond.my!=''">
+			and q.user_id=#{cond.my}
+		</if>
+		<if test="cond.solveType !=null and cond.solveType.length>0">
+			and q.is_solve in
+			<foreach collection="cond.solveType" close=")" open="(" item="solve"
+				separator=",">
+				#{solve}
+			</foreach>
+		</if>
+		<if test="cond.categorys !=null and cond.categorys.length>0">
+			and q.category in
+			<foreach collection="cond.categorys" close=")" open="(" item="category"
+				separator=",">
+				#{category}
+			</foreach>
+		</if>
+		<if test="cond.title !=null and cond.title!=''">
+			and q.title like CONCAT('%',#{cond.title},'%')
+		</if>
+		<!-- 默认查看所有的 -->
+		<if test="cond.categorys==null and cond.solveType==null and (cond.my=='' or cond.my==null)">
+			and (1!=1
+			or 1=1 )
+		</if>
+		order by q.rec_update_date desc
+	</sql>
+
+	<select id="queryTQuestionForPage" resultMap="BaseResultMap">
+		<include refid="queryTQuestionForPageSql" />
+		<include refid="MySqlDialectSuffix" />
+	</select>
+
+	<select id="countTQuestionForPage" resultType="java.lang.Integer">
+		select count(*) from (
+		<include refid="queryTQuestionForPageSql" />
+		) t
+	</select>
+
+	<select id="queryMyHomeworkQuestion" resultMap="BaseResultMap">
+		SELECT
+		distinct
+		tq.*
+		FROM
+		qa_stu_homework w,
+		qa_stu_hw_question q,
+		qa_stu_hw_detail d,
+		qa_t_question tq
+		WHERE
+		q.is_deleted = 'N'
+		AND w.is_deleted = 'N'
+		AND
+		d.is_deleted = 'N'
+		and tq.is_deleted='N'
+		AND q.homework_id = w.id
+		and
+		tq.id=q.question_id
+		AND d.homework_id = w.id
+		AND w.id = #{homeworkId}
+		AND d.stu_id = #{stuId}
+	</select>
+
+	<resultMap id="TeacherQuestionAndAttachMap" type="com.qaplus.entity.vo.TeacherQuestionVo"
+		extends="BaseResultMap">
+
+		<result column="attachment_desc" jdbcType="VARCHAR" property="attachmentDesc" />
+		<result column="attachment_name" jdbcType="VARCHAR" property="attachmentName" />
+		<result column="attachment_path" jdbcType="VARCHAR" property="attachmentPath" />
+		<result column="attachment_real_name" jdbcType="VARCHAR"
+			property="attachmentRealName" />
+	</resultMap>
+
+	<select id="queryTeaQuestionById" resultMap="TeacherQuestionAndAttachMap">
+		SELECT
+		q.*,a.attachment_desc,a.attachment_name,a.attachment_path,a.attachment_real_name
+		FROM
+		qa_t_question q,
+		qa_attachment a
+		WHERE
+		q.is_deleted = 'N'
+		AND
+		a.is_deleted = 'N'
+		AND q.question_attachment_id = a.id and q.id=#{id}
+	</select>
+
+	<select id="queryTeaAnswerById" resultMap="TeacherQuestionAndAttachMap">
+		SELECT
+		q.*,a.attachment_desc,a.attachment_name,a.attachment_path,a.attachment_real_name
+		FROM
+		qa_t_question q,
+		qa_attachment a
+		WHERE
+		q.is_deleted = 'N'
+		AND
+		a.is_deleted = 'N'
+		AND q.answer_attachment_id = a.id and q.id=#{id}
+	</select>
+
+</mapper>

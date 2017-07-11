@@ -1,0 +1,165 @@
+.container {
+	width: 95%;
+	margin: 50 auto;
+}
+
+#form {
+	width: 860px;
+	margin: 20px auto;
+	padding-top: 15px;
+}
+
+.fullScreenBg {
+	background-color: rgb(221, 225, 229) !important;
+}
+
+.question_search ul li {
+	float: left;
+	width: 75px;
+	margin-left: 10px;
+}
+
+.modal {
+	z-index: 99999999 !important;
+}
+
+.select2-container {
+	z-index: 19891019 !important;
+}
+
+.select2-container .select2-selection--single {
+	height: 35px !important;
+}
+
+#select2-categray-container {
+	line-height: 35px !important;
+}
+
+#radioset ul li {
+	float: left;
+	width: 100px;
+	margin-left: 10px;
+}
+
+#content {
+	background-color: white;
+	margin: 20px auto;
+	border-radius: 5px;
+	height: 100%;
+	width: 900px;
+}
+/* Custom Styles */
+ul.nav-tabs {
+	width: 200px;
+	margin-top: 20px;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	position: fixed;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+}
+
+ul.nav-tabs li {
+	margin: 0;
+	border-top: 1px solid #ddd;
+}
+
+ul.nav-tabs li:first-child {
+	border-top: none;
+}
+
+ul.nav-tabs li a {
+	margin: 0;
+	padding: 8px 16px;
+	border-radius: 0;
+}
+
+ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+	color: #fff;
+	background: #0088cc;
+	border: 1px solid #0088cc;
+}
+
+ul.nav-tabs li:first-child a {
+	border-radius: 4px 4px 0 0;
+}
+
+ul.nav-tabs li:last-child a {
+	border-radius: 0 0 4px 4px;
+}
+
+ul.nav-tabs.affix {
+	top: 30px; /* Set the top position of pinned element */
+}
+
+/** to top **/
+.dowebok {
+	width: 728px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.dowebok h1 {
+	text-align: center;
+}
+
+.dowebok h2 {
+	margin-top: 2em;
+	border-bottom: 1px solid #ccc;
+}
+
+.dowebok pre {
+	padding: .5em 1em;
+	border: 1px solid #ccc;
+}
+
+.dowebok table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.dowebok th, .dowebok td {
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+}
+
+.dowebok tr:nth-child(2n) {
+	background-color: #f8f8f8;
+}
+
+.to-top {
+	display: none;
+	padding: 0 20px;
+	font-size: 35px;
+}
+
+.vad {
+	margin: 100px 0 10px;
+	font-family: Consolas, arial, 宋体, sans-serif;
+	text-align: center;
+}
+
+.vad a {
+	display: inline-block;
+	height: 36px;
+	line-height: 36px;
+	margin: 0 5px;
+	padding: 0 50px;
+	font-size: 14px;
+	text-align: center;
+	color: #eee;
+	text-decoration: none;
+	background-color: #222;
+}
+
+.vad a:hover {
+	color: #fff;
+	background-color: #000;
+}
+
+.thead {
+	width: 728px;
+	height: 90px;
+	margin: 0 auto;
+	border-bottom: 40px solid transparent;
+}

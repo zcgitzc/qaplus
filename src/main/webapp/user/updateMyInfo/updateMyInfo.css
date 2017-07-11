@@ -1,0 +1,57 @@
+#container {
+	width: 95%;
+	margin: 50 auto;
+}
+
+#radioset ul li {
+	float: left;
+	width: 135px;
+	margin-left: 10px;
+}
+
+#left {
+	width: 60%;
+	height: 100%;
+	float: left;
+}
+
+#myQrCodeSection {
+	width: 325px;
+	height: 450px;
+	margin-left: 70%;
+	text-align: center;
+	background-color: #F4F2F5;
+	margin-top: 20px;
+}
+
+.media {
+	margin-left: 53px;
+	padding-top: 23px;
+}
+
+#qrCodeBg {
+	width: 173px;
+	height: 173px;
+	background-color: white;
+	margin: 50 auto;
+}
+
+#tab2-left {
+	width: 60%;
+	height: 100%;
+	float: left;
+	margin-top: 20px;
+}
+
+#tab2-right {
+	width: 40%;
+	height: 100%;
+	float: left;
+}
+
+#updateIcon {
+	border: 0px solid #ddd;
+	width: 70%;
+	margin: 40px auto;
+	text-align: center;
+}

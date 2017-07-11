@@ -1,0 +1,13 @@
+#btnFormGroup {
+    margin-top: 50px;
+    text-align: center;
+}
+#btnFormGroup button: last-child {
+    margin-left: 40px;
+}
+.layui-layer {
+    z-index: 100 !important;
+}
+.layui-layer-shade{
+    z-index: 99 !important;
+}

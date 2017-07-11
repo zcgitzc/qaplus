@@ -1,0 +1,36 @@
+.container {
+	width: 95%;
+	margin: 50 auto;
+}
+.categray ul li {
+	float: left;
+	width: 75px;
+	margin-left: 10px;
+}
+
+.categray {
+	margin-left: -55px;
+}
+#radioset ul li {
+	float: left;
+	width: 135px;
+	margin-left: 10px;
+}
+.wrap {
+	float: left;
+	width: 48%;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+#addQuestionForm{
+	text-align: center;
+}
+#buttonFromGroup {
+	margin-top: 40px;
+}
+#addQuestion{
+	margin-left: 95px;
+}
+.select2-container {
+	z-index: 19891015 !important;
+}

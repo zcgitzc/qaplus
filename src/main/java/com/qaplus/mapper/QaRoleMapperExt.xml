@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaRoleMapperExt">
+	<select id="queryUserRole" resultMap="BaseResultMap">
+		SELECT
+		l.*
+		FROM
+		qa_role l,
+		qa_user_role r
+		WHERE
+		l.is_deleted = 'N'
+		AND r.is_deleted = 'N'
+		AND l.`enable` = 'Y'
+		AND r.role_id = l.id
+		AND r.user_id =#{userId}
+	</select>
+</mapper>

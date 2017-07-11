@@ -1,0 +1,52 @@
+.nav i {
+	display: block;
+	background: #f00;
+	border-radius: 50%;
+	width: 5px;
+	height: 5px;
+	top: 0px;
+	right: 0px;
+	position: absolute;
+}
+
+ul, li {
+	list-style: none;
+}
+
+.box {
+	height: 35px;
+	overflow: hidden;
+	width: 200px;
+}
+
+.t_news {
+	height: 19px;
+	color: #fff;
+	margin: 15px 0;
+	overflow: hidden;
+	position: relative;
+	width: 200px;
+}
+
+.news_li, .swap {
+	line-height: 19px;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	width: 200px;
+	left: 20px;
+}	
+
+.news_li a, .swap a {
+	color: #fff;
+	width: 300px;
+}
+
+.swap {
+	top: 19px;
+	width: 200px;
+}
+
+#checkboxList1 label {
+	margin: 3px 50px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>电子邮箱 - QAPLUS</title>
+	<style type="text/css">
+*{margin:0;padding:0}
+.content{
+   padding-right:20px;
+}
+body{font-size:15px;}
+.container{padding:10px 20px;line-height:25px;}
+</style>
+</head>
+<body>
+	<div class="container">
+	<div style="margin-top:30px;">
+		<p class="content">您好，</p>
+		<p style="margin-left: 50px;">以下开票号已经产生30天，但仍未有任何发票录入，请关注：</p>
+	</div>
+	<table style="margin-left:50px;margin-top:20px;">
+		<thead style="background-color:#ddd;border-color:#ddd">
+			<tr>
+				<th class="confluenceTh">公司</th>
+				<th class="confluenceTh">订单号</th>
+				<th class="confluenceTh">开票号</th>
+				<th class="confluenceTh">开票号产生日期</th>
+				<th class="confluenceTh">已产生天数</th>
+				<th class="confluenceTh">来源系统</th>
+				<th class="confluenceTh">采购人/提交人</th>
+			</tr>
+		</thead>
+		<tbody>
+			$!key  这里是测试数据
+			##
+			###foreach($orgMapping in $list)
+			##	<tr>
+			##		<td class="confluenceTh">$!orgMapping.orgName</td>
+			##		<td class="confluenceTh">$!orgMapping.poNo</td>
+			##		<td class="confluenceTh">$!orgMapping.billableNo</td>
+			##		<td class="confluenceTh">$!orgMapping.gmtCreateDate</td>
+			##		<td class="confluenceTh">$!orgMapping.alreadyDays天</td>
+			##		<td class="confluenceTh">$!orgMapping.sourceSystem</td>
+			##		<td class="confluenceTh">$!orgMapping.creator</td>
+			##	</tr>
+			###end
+			##
+		</tbody>
+	</table>
+	QAPLUS平台<br/>
+	$currentDate
+	</div>
+</div>
+</body>
+</html>

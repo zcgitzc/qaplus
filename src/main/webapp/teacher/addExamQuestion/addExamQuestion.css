@@ -1,0 +1,12 @@
+#container {
+	width: 95%;
+	margin: 50 auto;
+}
+
+#addExamQuestion {
+	margin: 0 30px;
+}
+
+#radioset {
+	margin-left: -45px;
+}

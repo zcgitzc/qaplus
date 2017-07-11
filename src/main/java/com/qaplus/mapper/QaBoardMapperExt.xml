@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaBoardMapperExt">
+
+	<select id="selectAllMyBoard" resultMap="BaseResultMap">
+		SELECT
+		b.*
+		FROM
+		qa_board b,
+		qa_board_user u
+		WHERE
+		b.is_deleted = 'N'
+		AND u.is_deleted = 'N'
+		AND b.id =
+		u.board_id
+		AND u.user_id = #{id}
+		and NOW() BETWEEN b.start_time and
+		b.end_time
+		ORDER BY
+		b.important_flag ,b.keep_top DESC
+	</select>
+
+	<select id="selectMaxKeepTop" resultMap="BaseResultMap">
+		select * from qa_board order by keep_top desc limit 1
+		<!-- 这种SQL 如果返回null 的话会出bug -->
+		<!-- select MAX(keep_top)
+		from qa_board -->
+	</select>
+</mapper>

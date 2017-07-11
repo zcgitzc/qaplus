@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaLogMapperExt" >
+
+	<sql id="queryAllLogSQL">
+		select * from qa_log l where l.is_deleted='N' 
+		<if test="searchKey !=null and searchKey!=''">
+			and l.method_desc like CONCAT('%',#{searchKey},'%')
+		</if>
+		<if test='rightLog == "Y"'>
+			and l.is_success='Y'
+		</if>
+		<if test='rightLog != "Y"'>
+			and l.is_success='N'
+		</if>
+		order by l.rec_update_date desc
+	</sql>
+		
+	
+	<select id="queryAllLog" resultMap="BaseResultMap">
+		<include refid="queryAllLogSQL"/>
+		<include refid="MySqlDialectSuffix" />
+	</select>
+	
+	<select id="countForQueryAll" resultType="java.lang.Integer">
+		select count(*) from (
+		<include refid="queryAllLogSQL" />
+		) t
+	</select>
+</mapper>

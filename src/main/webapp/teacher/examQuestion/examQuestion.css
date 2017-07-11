@@ -1,0 +1,11 @@
+#container {
+	width: 95%;
+	margin: 50 auto;
+}
+
+
+.question_search ul li {
+	float: left;
+	width: 75px;
+	margin-left: 10px;
+}

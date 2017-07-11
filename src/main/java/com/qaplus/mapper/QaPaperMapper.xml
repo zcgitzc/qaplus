@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaPaperMapperExt" >
+  <resultMap id="BaseResultMap" type="com.qaplus.entity.QaPaper" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="rec_create_date" property="recCreateDate" jdbcType="TIMESTAMP" />
+    <result column="rec_update_date" property="recUpdateDate" jdbcType="TIMESTAMP" />
+    <result column="rec_update_user" property="recUpdateUser" jdbcType="VARCHAR" />
+    <result column="rec_create_user" property="recCreateUser" jdbcType="VARCHAR" />
+    <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+    <result column="question_amount" property="questionAmount" jdbcType="INTEGER" />
+    <result column="question_ids" property="questionIds" jdbcType="VARCHAR" />
+    <result column="diff_stage" property="diffStage" jdbcType="VARCHAR" />
+    <result column="invigilate_person" property="invigilatePerson" jdbcType="BIGINT" />
+    <result column="paper_person" property="paperPerson" jdbcType="BIGINT" />
+    <result column="paper_title" property="paperTitle" jdbcType="VARCHAR" />
+    <result column="paper_category" property="paperCategory" jdbcType="VARCHAR" />
+    <result column="exam_date" property="examDate" jdbcType="TIMESTAMP" />
+    <result column="exam_long" property="examLong" jdbcType="INTEGER" />
+    <result column="upset_question" property="upsetQuestion" jdbcType="CHAR" />
+    <result column="is_effect" property="isEffect" jdbcType="CHAR" />
+    <result column="upset_item" property="upsetItem" jdbcType="CHAR" />
+    <result column="paper_status" property="paperStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, is_deleted, rec_create_date, rec_update_date, rec_update_user, rec_create_user, 
+    total_score, question_amount, question_ids, diff_stage, invigilate_person, paper_person, 
+    paper_title, paper_category, exam_date, exam_long, upset_question, is_effect, upset_item, 
+    paper_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qaplus.entity.QaPaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from qa_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size != 0" >
+      and is_deleted = 'N'
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size == 0" >
+       where is_deleted = 'N' 
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from qa_paper
+    where id = #{id,jdbcType=BIGINT}
+    and is_deleted = 'N'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from qa_paper
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qaplus.entity.QaPaperExample" >
+    delete from qa_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.qaplus.entity.QaPaper" keyProperty="id" useGeneratedKeys="true" >
+    insert into qa_paper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recUpdateUser == null" >
+        rec_update_user,
+      </if>
+      <if test="recUpdateDate == null" >
+        rec_update_date,
+      </if>
+      <if test="recCreateDate == null" >
+        rec_create_date,
+      </if>
+      <if test="isDeleted == null" >
+        is_deleted,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="recCreateDate != null" >
+        rec_create_date,
+      </if>
+      <if test="recUpdateDate != null" >
+        rec_update_date,
+      </if>
+      <if test="recUpdateUser != null" >
+        rec_update_user,
+      </if>
+      <if test="recCreateUser != null" >
+        rec_create_user,
+      </if>
+      <if test="totalScore != null" >
+        total_score,
+      </if>
+      <if test="questionAmount != null" >
+        question_amount,
+      </if>
+      <if test="questionIds != null" >
+        question_ids,
+      </if>
+      <if test="diffStage != null" >
+        diff_stage,
+      </if>
+      <if test="invigilatePerson != null" >
+        invigilate_person,
+      </if>
+      <if test="paperPerson != null" >
+        paper_person,
+      </if>
+      <if test="paperTitle != null" >
+        paper_title,
+      </if>
+      <if test="paperCategory != null" >
+        paper_category,
+      </if>
+      <if test="examDate != null" >
+        exam_date,
+      </if>
+      <if test="examLong != null" >
+        exam_long,
+      </if>
+      <if test="upsetQuestion != null" >
+        upset_question,
+      </if>
+      <if test="isEffect != null" >
+        is_effect,
+      </if>
+      <if test="upsetItem != null" >
+        upset_item,
+      </if>
+      <if test="paperStatus != null" >
+        paper_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recUpdateUser == null" >
+        'system',
+      </if>
+      <if test="recUpdateDate == null" >
+        NOW(),
+      </if>
+      <if test="recCreateDate == null" >
+        NOW(),
+      </if>
+      <if test="isDeleted == null" >
+        'N',
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="recCreateDate != null" >
+        #{recCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateDate != null" >
+        #{recUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateUser != null" >
+        #{recUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recCreateUser != null" >
+        #{recCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="totalScore != null" >
+        #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="questionAmount != null" >
+        #{questionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="questionIds != null" >
+        #{questionIds,jdbcType=VARCHAR},
+      </if>
+      <if test="diffStage != null" >
+        #{diffStage,jdbcType=VARCHAR},
+      </if>
+      <if test="invigilatePerson != null" >
+        #{invigilatePerson,jdbcType=BIGINT},
+      </if>
+      <if test="paperPerson != null" >
+        #{paperPerson,jdbcType=BIGINT},
+      </if>
+      <if test="paperTitle != null" >
+        #{paperTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="paperCategory != null" >
+        #{paperCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="examDate != null" >
+        #{examDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examLong != null" >
+        #{examLong,jdbcType=INTEGER},
+      </if>
+      <if test="upsetQuestion != null" >
+        #{upsetQuestion,jdbcType=CHAR},
+      </if>
+      <if test="isEffect != null" >
+        #{isEffect,jdbcType=CHAR},
+      </if>
+      <if test="upsetItem != null" >
+        #{upsetItem,jdbcType=CHAR},
+      </if>
+      <if test="paperStatus != null" >
+        #{paperStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qaplus.entity.QaPaperExample" resultType="java.lang.Integer" >
+    select count(*) from qa_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size != 0" >
+      and is_deleted = 'N'
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size == 0" >
+       where is_deleted = 'N' 
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qaplus.entity.QaPaper" >
+    update qa_paper
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="recCreateDate != null" >
+        rec_create_date = #{recCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateDate != null" >
+        rec_update_date = #{recUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateDate == null" >
+        rec_update_date = NOW(),
+      </if>
+      <if test="recUpdateUser != null" >
+        rec_update_user = #{recUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recUpdateUser == null" >
+        rec_update_user = 'system',
+      </if>
+      <if test="recCreateUser != null" >
+        rec_create_user = #{recCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="totalScore != null" >
+        total_score = #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="questionAmount != null" >
+        question_amount = #{questionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="questionIds != null" >
+        question_ids = #{questionIds,jdbcType=VARCHAR},
+      </if>
+      <if test="diffStage != null" >
+        diff_stage = #{diffStage,jdbcType=VARCHAR},
+      </if>
+      <if test="invigilatePerson != null" >
+        invigilate_person = #{invigilatePerson,jdbcType=BIGINT},
+      </if>
+      <if test="paperPerson != null" >
+        paper_person = #{paperPerson,jdbcType=BIGINT},
+      </if>
+      <if test="paperTitle != null" >
+        paper_title = #{paperTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="paperCategory != null" >
+        paper_category = #{paperCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="examDate != null" >
+        exam_date = #{examDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examLong != null" >
+        exam_long = #{examLong,jdbcType=INTEGER},
+      </if>
+      <if test="upsetQuestion != null" >
+        upset_question = #{upsetQuestion,jdbcType=CHAR},
+      </if>
+      <if test="isEffect != null" >
+        is_effect = #{isEffect,jdbcType=CHAR},
+      </if>
+      <if test="upsetItem != null" >
+        upset_item = #{upsetItem,jdbcType=CHAR},
+      </if>
+      <if test="paperStatus != null" >
+        paper_status = #{paperStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+    and is_deleted = 'N'
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qaplus.entity.QaPaper" >
+    update qa_paper
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      rec_create_date = #{recCreateDate,jdbcType=TIMESTAMP},
+      rec_update_date = #{recUpdateDate,jdbcType=TIMESTAMP},
+      rec_update_user = #{recUpdateUser,jdbcType=VARCHAR},
+      rec_create_user = #{recCreateUser,jdbcType=VARCHAR},
+      total_score = #{totalScore,jdbcType=INTEGER},
+      question_amount = #{questionAmount,jdbcType=INTEGER},
+      question_ids = #{questionIds,jdbcType=VARCHAR},
+      diff_stage = #{diffStage,jdbcType=VARCHAR},
+      invigilate_person = #{invigilatePerson,jdbcType=BIGINT},
+      paper_person = #{paperPerson,jdbcType=BIGINT},
+      paper_title = #{paperTitle,jdbcType=VARCHAR},
+      paper_category = #{paperCategory,jdbcType=VARCHAR},
+      exam_date = #{examDate,jdbcType=TIMESTAMP},
+      exam_long = #{examLong,jdbcType=INTEGER},
+      upset_question = #{upsetQuestion,jdbcType=CHAR},
+      is_effect = #{isEffect,jdbcType=CHAR},
+      upset_item = #{upsetItem,jdbcType=CHAR},
+      paper_status = #{paperStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+    and is_deleted = 'N'
+  </update>
+  <sql id="MySqlDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[  limit #{page.begin},#{page.end}  ]]>
+    </if>
+  </sql>
+</mapper>

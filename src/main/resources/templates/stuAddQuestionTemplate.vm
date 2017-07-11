@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>电子邮箱 - QAPLUS</title>
+	<style type="text/css">
+		*{margin:0;padding:0}
+	</style>
+</head>
+<body>
+	学生：$!stuName 毫不客气的给你提了一个问题，请登录系统（$!solveQuestionUrl）进入问题列表，回答学生提的问题。
+	<br/>
+	问题内容如下：
+	<br/>
+	问题标题：$!questionTitle
+	<br/>
+	问题内容：$!questionContent
+	<br/>
+	<span style="color:red">请注意：看看有没有附件哦！</span>
+</div>
+</body>
+</html>	

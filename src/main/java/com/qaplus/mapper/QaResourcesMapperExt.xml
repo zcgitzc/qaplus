@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaResourcesMapperExt">
+	<select id="selectUserResources" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		SELECT DISTINCT
+		resources.*
+		FROM
+		qa_resources resources,
+		qa_user_role role,
+		qa_resources_role rr
+		WHERE
+		resources.is_deleted = 'N'
+		AND role.is_deleted = 'N'
+		AND rr.is_deleted = 'N'
+		AND role.user_id = #{userId}
+		<!-- 不包括按钮和首页导航 -->
+		and resources.type in (0,1)
+		AND role.role_id = rr.role_id
+		AND rr.resc_id = resources.id
+	</select>
+	
+	<select id="selectHomeResources" parameterType="java.lang.Long"
+	resultMap="BaseResultMap">
+		SELECT DISTINCT
+			resources.*
+		FROM
+			qa_resources resources,
+			qa_user_role role,
+			qa_resources_role rr
+		WHERE
+			resources.is_deleted = 'N'
+		AND role.is_deleted = 'N'
+		AND rr.is_deleted = 'N'
+		AND role.user_id = #{userId}
+		<!-- 只要首页导航  -->
+		AND resources.type = 3
+		AND role.role_id = rr.role_id
+		AND rr.resc_id = resources.id
+	</select>
+</mapper>

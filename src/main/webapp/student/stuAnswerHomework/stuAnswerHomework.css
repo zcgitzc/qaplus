@@ -1,0 +1,15 @@
+body {
+	background-color: #DDE1E5 !important;
+}
+
+#content {
+	background-color: white;
+	margin: 20px auto;
+	border-radius: 5px;
+	width: 900px;
+}
+
+#form {
+	width: 860px;
+	margin: 20px 20px;
+}

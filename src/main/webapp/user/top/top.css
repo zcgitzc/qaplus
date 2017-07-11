@@ -1,0 +1,40 @@
+.nav i {
+	display: block;
+	background: #f00;
+	border-radius: 50%;
+	width: 5px;
+	height: 5px;
+	top: 0px;
+	right: 0px;
+	position: absolute;
+}
+
+ul, li {
+	list-style: none;
+}
+
+.boardOption {
+	margin-left: 50px;
+}
+
+#btnGroup {
+	margin-top: 80px;
+}
+
+.boardOption ul li {
+	float: left;
+	width: 75px;
+	margin-left: 10px;
+}
+
+/****/
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+	background-color: #0a4765 !important;
+	border-color: #337ab7 !important;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+	color: white !important;
+	text-decoration: none;
+	background-color: #0a4765 !important;
+}

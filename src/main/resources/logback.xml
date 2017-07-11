@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{H:mm} %-5level [%logger{16}] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="ALL_INFO"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home/zhuangchuan/${log.project.name}.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+				</pattern>
+			</layout>
+		</encoder>
+	</appender>
+
+
+	<appender name="ALL_ERROR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home/zhuangchuan/${log.project.name}_all_error.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+				</pattern>
+			</layout>
+		</encoder>
+	</appender>
+
+
+	<appender name="SQL"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home/zhuangchuan/${log.project.name}_sql.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+				</pattern>
+			</layout>
+		</encoder>
+	</appender>
+
+
+
+
+	<logger name="dao" level="DEBUG">
+		<appender-ref ref="SQL" />
+	</logger>
+	
+
+	<root level="DEBUG">
+		<appender-ref ref="ALL_INFO" />
+		<appender-ref ref="ALL_ERROR" />
+		<!-- 有定时器，不要在控制台输出日志信息
+		<appender-ref ref="Console" /> -->
+	</root>
+
+
+	<!-- 下面配置一些第三方包的日志过滤级别，用于避免刷屏 -->
+	<logger name="org.hibernate" level="WARN" />
+	<logger name="org.springframework" level="WARN" />
+	<logger name="com.opensymphony" level="WARN" />
+	<logger name="org.apache" level="WARN" />
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder"
+		level="WARN" />
+	<logger name="org.hibernate.type.descriptor.sql.BasicExtractor"
+		level="DEBUG" />
+	<logger name="org.hibernate.SQL" level="INFO" />
+	<logger name="org.hibernate.engine.QueryParameters" level="INFO" />
+	<logger name="org.hibernate.engine.query.HQLQueryPlan" level="INFO" />
+	<logger name="org.eclipse.jetty" level="WARN" />
+	<logger name="org.jboss.netty" level="INFO" />
+</configuration>

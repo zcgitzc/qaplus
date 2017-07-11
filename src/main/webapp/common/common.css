@@ -1,0 +1,43 @@
+body, button, input, select, textarea, td, th, div {
+	font-family: tahoma, arial, 'PingFang SC', 'Hiragino Sans GB',
+		'WenQuanYi Micro Hei', 'Microsoft YaHei', \5b8b\4f53,
+		sans-serif !important;
+}
+table {
+	background-color: #F5F5F5;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+li {
+	list-style-type: none;
+}
+/** 头部公用样式 **/
+.navbar-header {
+	margin-left: 2%;
+}
+
+.navbar-body {
+	margin-left: 12%;
+}
+
+.content_wrap {
+	width: 95%;
+	height: 100%;
+	margin: 0px auto;
+}
+
+.navbar {
+	background-color: #0088CC;
+}
+
+.detail-view {
+	word-wrap: break-word;
+}
+/** 设置layer的表头 **/
+.layui-layer-title {
+	background-color: #0088CC !important;
+	color: white !important;
+}

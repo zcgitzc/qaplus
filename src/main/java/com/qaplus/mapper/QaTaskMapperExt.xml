@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaTaskMapperExt">
+	<select id="queryTaskByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		SELECT
+			t.*
+		FROM
+			qa_task t,
+			qa_user_task ut
+		WHERE
+			ut.is_deleted = 'N'
+		AND t.is_deleted = 'N'
+		AND t.id = ut.task_id
+		AND t.is_solve = 'N'
+		AND ut.user_id = #{userId}
+		ORDER BY
+			t.rec_update_date DESC
+	</select>
+</mapper>

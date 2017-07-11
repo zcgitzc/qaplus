@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaStuGraduationMapperExt" >
+  <resultMap id="BaseResultMap" type="com.qaplus.entity.QaStuGraduation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="rec_create_date" property="recCreateDate" jdbcType="TIMESTAMP" />
+    <result column="rec_update_date" property="recUpdateDate" jdbcType="TIMESTAMP" />
+    <result column="rec_update_user" property="recUpdateUser" jdbcType="VARCHAR" />
+    <result column="rec_create_user" property="recCreateUser" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="baise_salary" property="baiseSalary" jdbcType="DECIMAL" />
+    <result column="work_address" property="workAddress" jdbcType="VARCHAR" />
+    <result column="work_desc" property="workDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, is_deleted, rec_create_date, rec_update_date, rec_update_user, rec_create_user, 
+    user_id, company_name, baise_salary, work_address, work_desc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qaplus.entity.QaStuGraduationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from qa_stu_graduation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size != 0" >
+      and is_deleted = 'N'
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size == 0" >
+       where is_deleted = 'N' 
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from qa_stu_graduation
+    where id = #{id,jdbcType=BIGINT}
+    and is_deleted = 'N'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from qa_stu_graduation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qaplus.entity.QaStuGraduationExample" >
+    delete from qa_stu_graduation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.qaplus.entity.QaStuGraduation" keyProperty="id" useGeneratedKeys="true" >
+    insert into qa_stu_graduation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recUpdateUser == null" >
+        rec_update_user,
+      </if>
+      <if test="recUpdateDate == null" >
+        rec_update_date,
+      </if>
+      <if test="recCreateDate == null" >
+        rec_create_date,
+      </if>
+      <if test="isDeleted == null" >
+        is_deleted,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="recCreateDate != null" >
+        rec_create_date,
+      </if>
+      <if test="recUpdateDate != null" >
+        rec_update_date,
+      </if>
+      <if test="recUpdateUser != null" >
+        rec_update_user,
+      </if>
+      <if test="recCreateUser != null" >
+        rec_create_user,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="baiseSalary != null" >
+        baise_salary,
+      </if>
+      <if test="workAddress != null" >
+        work_address,
+      </if>
+      <if test="workDesc != null" >
+        work_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recUpdateUser == null" >
+        'system',
+      </if>
+      <if test="recUpdateDate == null" >
+        NOW(),
+      </if>
+      <if test="recCreateDate == null" >
+        NOW(),
+      </if>
+      <if test="isDeleted == null" >
+        'N',
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="recCreateDate != null" >
+        #{recCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateDate != null" >
+        #{recUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateUser != null" >
+        #{recUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recCreateUser != null" >
+        #{recCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="baiseSalary != null" >
+        #{baiseSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="workAddress != null" >
+        #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="workDesc != null" >
+        #{workDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qaplus.entity.QaStuGraduationExample" resultType="java.lang.Integer" >
+    select count(*) from qa_stu_graduation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size != 0" >
+      and is_deleted = 'N'
+    </if>
+    <if test=" null!=oredCriteria and oredCriteria.size == 0" >
+       where is_deleted = 'N' 
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qaplus.entity.QaStuGraduation" >
+    update qa_stu_graduation
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="recCreateDate != null" >
+        rec_create_date = #{recCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateDate != null" >
+        rec_update_date = #{recUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdateDate == null" >
+        rec_update_date = NOW(),
+      </if>
+      <if test="recUpdateUser != null" >
+        rec_update_user = #{recUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recUpdateUser == null" >
+        rec_update_user = 'system',
+      </if>
+      <if test="recCreateUser != null" >
+        rec_create_user = #{recCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="baiseSalary != null" >
+        baise_salary = #{baiseSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="workAddress != null" >
+        work_address = #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="workDesc != null" >
+        work_desc = #{workDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+    and is_deleted = 'N'
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qaplus.entity.QaStuGraduation" >
+    update qa_stu_graduation
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      rec_create_date = #{recCreateDate,jdbcType=TIMESTAMP},
+      rec_update_date = #{recUpdateDate,jdbcType=TIMESTAMP},
+      rec_update_user = #{recUpdateUser,jdbcType=VARCHAR},
+      rec_create_user = #{recCreateUser,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      baise_salary = #{baiseSalary,jdbcType=DECIMAL},
+      work_address = #{workAddress,jdbcType=VARCHAR},
+      work_desc = #{workDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+    and is_deleted = 'N'
+  </update>
+  <sql id="MySqlDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[  limit #{page.begin},#{page.end}  ]]>
+    </if>
+  </sql>
+</mapper>

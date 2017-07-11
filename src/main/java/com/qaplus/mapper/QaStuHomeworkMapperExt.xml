@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaStuHomeworkMapperExt">
+	<select id="selectMyHomework" resultType="com.qaplus.entity.vo.StuHomeworkVo"
+		parameterType="java.lang.Long">
+		SELECT
+		w.id,
+		w.title,
+		w.commit_date as commitDate,
+		d.is_commit as isCommit
+		FROM
+		qa_stu_homework w,
+		qa_stu_hw_detail d
+		WHERE
+		d.is_deleted = 'N'
+		AND stu_id = #{id}
+		AND d.homework_id = w.id
+		AND
+		w.is_deleted = 'N'
+		order by w.rec_update_date desc
+	</select>
+
+	<sql id="queryHomeworkForPageSQL">
+		select
+		<include refid="Base_Column_List" />
+		from qa_stu_homework h where h.is_deleted='N'
+		<if test="homework.title!=null and homework.title!=''">
+			and h.title like CONCAT("%",#{homework.title},"%")
+		</if>
+		order by h.rec_update_date desc
+	</sql>
+
+	<select id="queryHomeworkForPage" resultMap="BaseResultMap">
+		<include refid="queryHomeworkForPageSQL" />
+		<include refid="MySqlDialectSuffix" />
+	</select>
+
+	<select id="countHomeworkForPage" resultType="java.lang.Integer">
+		select count(*) from (
+		<include refid="queryHomeworkForPageSQL" />
+		) t
+	</select>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaClassMapperExt" >
+	<sql id="queryAllClassForPageSql">
+		select <include refid="Base_Column_List"/>
+		from qa_class q where q.is_deleted='N' order by q.rec_update_date desc
+	</sql>
+	
+	<select id="queryAllClassForPage" resultMap="BaseResultMap">
+		<include refid="queryAllClassForPageSql"/>
+		<if test="page.end!=0">
+			limit #{page.begin},#{page.end}
+		</if>
+	</select>
+	
+	<select id="countAllClassForPage" resultType="java.lang.Integer">
+		select count(*) from (
+			<include refid="queryAllClassForPageSql"/>
+		) t
+	</select>
+	
+	<select id="queryClassByUserId" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			qa_class c,
+			qa_user_class uc
+		WHERE
+			c.is_deleted = 'N'
+		AND uc.is_deleted = 'N'
+		AND uc.class_id = c.id
+		AND uc.user_id = #{userId} 
+	</select>
+</mapper>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qaplus.mapper.QaSQuestionMapperExt">
+	<sql id="querySQuestionForPageSql">
+		select
+		<include refid="Base_Column_List" />
+		from qa_s_question q where q.is_deleted='N'
+		<if test="cond.my != null and cond.my!=''">
+			<if test="type != null and type=='ROLE_STU'">
+				and q.question_person=#{cond.my}
+			</if>
+			<if test="type != null and type=='ROLE_TEA'">
+				and q.solve_person=#{cond.my}
+			</if>
+		</if>
+		<if test="cond.solveType !=null and cond.solveType.length>0">
+			and q.is_solve in
+			<foreach collection="cond.solveType" close=")" open="(" item="solve"
+				separator=",">
+				#{solve}
+			</foreach>
+		</if>
+		<if test="cond.categorys !=null and cond.categorys.length>0">
+			and q.category in
+			<foreach collection="cond.categorys" close=")" open="(" item="category"
+				separator=",">
+				#{category}
+			</foreach>
+		</if>
+
+		<if test="cond.title !=null and cond.title!=''">
+			and q.title like CONCAT('%',#{cond.title},'%')
+		</if>
+		<!-- 默认查看所有的 -->
+		<if test="cond.categorys==null and cond.solveType==null and (cond.my=='' or cond.my==null)">
+			and (1!=1
+			or 1=1 )
+		</if>
+		order by q.rec_update_date desc
+	</sql>
+
+	<select id="querySQuestionForPage" resultMap="BaseResultMap">
+		<include refid="querySQuestionForPageSql" />
+		<include refid="MySqlDialectSuffix" />
+	</select>
+
+	<select id="countSQuestionForPage" resultType="java.lang.Integer">
+		select count(*) from (
+		<include refid="querySQuestionForPageSql" />
+		) t
+	</select>
+
+
+	<resultMap type="java.util.HashMap" id="QuestionChartMap">
+		<result property="name" column="name" />
+		<result property="value" column="value" />
+	</resultMap>
+
+
+	<select id="queryForSolve" resultMap="QuestionChartMap">
+		SELECT
+		if(q.is_solve='Y','已解决','未解决')
+		as name,
+		count(*) as value
+		FROM
+		qa_s_question q
+		WHERE
+		q.is_deleted = 'N'
+		GROUP BY
+		q.is_solve
+	</select>
+
+	<select id="queryForCategory" resultMap="QuestionChartMap">
+		SELECT
+		t.category AS
+		NAME,
+		count(*) AS
+		VALUE
+
+		FROM
+		qa_s_question t
+		WHERE
+		t.is_deleted = 'N' and
+		t.is_solve='Y'
+		GROUP BY
+		t.category
+	</select>
+
+	<select id="queryForDate" resultMap="QuestionChartMap">
+		SELECT
+		DATE_FORMAT(t.solve_time, '%Y-%m-%d') NAME,
+		count(*)
+		VALUE
+		FROM
+		qa_s_question t where t.is_deleted='N' and t.is_solve='Y'
+		GROUP BY
+		NAME
+
+	</select>
+
+
+	<select id="queryIsDeletedQuestion" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		qa_s_question q
+		WHERE
+		q.is_deleted = 'Y'
+		AND q.question_person =
+		#{userId}
+	</select>
+
+
+	<select id="queryQuestionCountOneDay" resultMap="QuestionChartMap">
+		SELECT
+		DATE_FORMAT(
+		t.rec_create_date,
+		'%Y-%m-%d'
+		) NAME,
+		count(*)
+		VALUE
+		FROM
+		qa_s_question t
+		WHERE
+		t.is_deleted = 'N'
+		and t.question_person=#{userId}
+		GROUP BY
+		NAME
+		HAVING
+		NAME = #{date}
+	</select>
+
+
+
+
+	<select id="queryUnsolveQuestion" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		qa_s_question q
+		WHERE
+		q.is_deleted = 'N'
+		AND q.is_solve = 'N'
+		and
+		q.solve_person=#{userId}
+	</select>
+
+	<resultMap id="QuestionAndAttachMap" type="com.qaplus.entity.vo.StuQuestionVo" extends="BaseResultMap">
+		<result column="attachment_desc" jdbcType="VARCHAR" property="attachmentDesc" />
+		<result column="attachment_name" jdbcType="VARCHAR" property="attachmentName" />
+		<result column="attachment_path" jdbcType="VARCHAR" property="attachmentPath" />
+		<result column="attachment_real_name" jdbcType="VARCHAR"
+			property="attachmentRealName" />
+	</resultMap>
+
+	<select id="queryStuQuestionAndAttachById" resultMap="QuestionAndAttachMap">
+		SELECT
+		q.*,a.attachment_desc,a.attachment_name,a.attachment_path,a.attachment_real_name
+		FROM
+		qa_s_question q,
+		qa_attachment a
+		WHERE
+		q.is_deleted = 'N'
+		AND
+		a.is_deleted = 'N'
+		AND q.question_attachment_id = a.id and q.id=#{id}
+	</select>
+
+
+
+</mapper>

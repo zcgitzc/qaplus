@@ -130,7 +130,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.29</version>
+			<version>8.0.16</version>
 		</dependency>
 		<!-- spring 核心功能包 spring-aop-4.3.0.RELEASE.jar spring-beans-4.3.0.RELEASE.jar 
 			spring-context-4.3.0.RELEASE.jar spring-core-4.3.0.RELEASE.jar spring-expression-4.3.0.RELEASE.jar 
@@ -392,7 +392,7 @@
 					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
-						<version>5.1.29</version>
+						<version>8.0.16</version>
 						<scope>runtime</scope>
 					</dependency>
 				</dependencies>
